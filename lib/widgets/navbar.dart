@@ -22,7 +22,7 @@ class Navbar extends StatelessWidget {
             ),
           ],
         ),
-        height: MediaQuery.of(context).size.height * 0.1,
+        height: kBottomNavigationBarHeight * 1.5,
         child: SafeArea(
           child: Stack(
             alignment: Alignment.center,
