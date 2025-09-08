@@ -60,6 +60,8 @@ class _CodesPageState extends State<CodesPage> {
     dataResult.fetchedAccounts.forEach((Account account) => totpAccounts.add(dataService.convertAccountToBloc(account)));
 
     dataService.accounts = totpAccounts;
+    dataService.isLoadingData = false;
+    _updateUI();
   }
 
   @override

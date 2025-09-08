@@ -45,11 +45,11 @@ class AccountContextMenuService {
 
   static Future<void> _onUpdateAccount(BuildContext context, TotpBloc bloc, TotpCodeGenerated state, Account newAccount) async {
     for (Storage storage in ListsConstants.storageServices) {
-      storage.removeAccount(state.toAccount())
-          .then((_) => storage.saveAccount(newAccount)
-          .then((_) => dataService.updateStream.add(null)));
+      await storage.removeAccount(state.toAccount());
+      await storage.saveAccount(newAccount);
     }
 
+    dataService.updateStream.add(null);
     navigatorService.navigateTo('codes');
   }
 

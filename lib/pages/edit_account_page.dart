@@ -2,7 +2,7 @@ import 'package:cody/constants/list_constants.dart';
 import 'package:cody/constants/style_constants.dart';
 import 'package:cody/models/account.dart';
 import 'package:cody/models/alert_dialog_content.dart';
-import 'package:cody/widgets/account_code.dart';
+import 'package:cody/widgets/loading.dart';
 import 'package:cody/widgets/page_title.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -21,6 +21,8 @@ class EditAccountPage extends StatefulWidget {
 
 class _EditAccountPageState extends State<EditAccountPage> {
 
+  bool isLoading = false;
+
   final TextEditingController providerController = TextEditingController();
   final TextEditingController accountNameController = TextEditingController();
 
@@ -37,7 +39,7 @@ class _EditAccountPageState extends State<EditAccountPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return (!isLoading) ? Container(
       padding: const EdgeInsets.all(mediumSize),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,7 +74,7 @@ class _EditAccountPageState extends State<EditAccountPage> {
           )
         ],
       ),
-    );
+    ) : Loading();
   }
 
   void _onSave() {
@@ -85,6 +87,10 @@ class _EditAccountPageState extends State<EditAccountPage> {
 
       return;
     }
+
+    setState(() {
+      isLoading = true;
+    });
 
     Account newAccount = Account(widget.account.id, newProvider, newAccountName, widget.account.secret, true, DateTime.now());
     widget.onSave(newAccount);
