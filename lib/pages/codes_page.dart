@@ -22,7 +22,7 @@ class CodesPage extends StatefulWidget {
   State<CodesPage> createState() => _CodesPageState();
 }
 
-class _CodesPageState extends State<CodesPage> {
+class _CodesPageState extends State<CodesPage> with WidgetsBindingObserver {
 
   late final Timer codesTimer;
 
@@ -30,18 +30,29 @@ class _CodesPageState extends State<CodesPage> {
 
   @override
   void initState() {
+    WidgetsBinding.instance.addObserver(this);
     dataService.cleanupLocalCodes();
     dataService.fetchNewData(_onDataLoaded);
     dataService.updateStream.stream.listen((_) => _onUpdateEvent());
-    codesTimer = Timer.periodic(const Duration(seconds: 1), (Timer timer) => _generateCodes());
+    codesTimer = _startCountdownTimer();
 
     super.initState();
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     codesTimer.cancel();
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+
+    if (state == AppLifecycleState.resumed) {
+      dataService.fetchNewData(_onDataLoaded);
+    }
   }
 
   void _onUpdateEvent() {
@@ -148,5 +159,10 @@ class _CodesPageState extends State<CodesPage> {
       });
     }
   }
+
+  Timer _startCountdownTimer() {
+    return Timer.periodic(const Duration(seconds: 1), (Timer timer) => _generateCodes());
+  }
+
 }
 
