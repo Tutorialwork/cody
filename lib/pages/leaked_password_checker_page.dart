@@ -1,7 +1,7 @@
+import 'package:cody/l10n/app_localizations.dart';
 import 'package:cody/services/leaked_password_checker_service.dart';
 import 'package:cody/services/toast_service.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 
 import '../constants/style_constants.dart';
@@ -29,7 +29,7 @@ class LeakedPasswordCheckerPageState extends State<LeakedPasswordCheckerPage> {
       child: Column(
         children: [
           PageTitle(
-            title: 'Password checker',
+            title: AppLocalizations.of(context)!.password_checker_title,
             hasBackButton: true,
           ),
           SizedBox(
@@ -39,16 +39,15 @@ class LeakedPasswordCheckerPageState extends State<LeakedPasswordCheckerPage> {
             controller: controller,
             enableInteractiveSelection: true,
             decoration: InputDecoration(
-              labelText: "Password",
+              labelText: AppLocalizations.of(context)!.password,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12), // Rounded corners
               ),
               suffixIcon: IconButton(
                 icon: Icon(Icons.done),
-                tooltip: 'Test',
                 onPressed: () async {
                   if (controller.text.isEmpty) {
-                    ToastService.showFailureToast('Password can\'t be empty.');
+                    ToastService.showFailureToast(AppLocalizations.of(context)!.toast_password_cannot_be_empty);
                     return;
                   }
 
@@ -96,7 +95,7 @@ class LeakedPasswordCheckerPageState extends State<LeakedPasswordCheckerPage> {
           height: smallSize,
         ),
         Text(
-          'This password was found in ${NumberFormat.decimalPattern().format(passwordLeakedCount)} known data breaches.',
+          AppLocalizations.of(context)!.label_password_breached.replaceAll('%count%', NumberFormat.decimalPattern().format(passwordLeakedCount)),
           style: codeTextStyle,
           textAlign: TextAlign.center,
         ),
@@ -116,7 +115,7 @@ class LeakedPasswordCheckerPageState extends State<LeakedPasswordCheckerPage> {
           height: smallSize,
         ),
         Text(
-          'This password was never found in any known data breach.',
+          AppLocalizations.of(context)!.label_password_not_breached,
           style: codeTextStyle,
           textAlign: TextAlign.center,
         ),

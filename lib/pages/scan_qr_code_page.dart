@@ -1,7 +1,6 @@
 import 'package:cody/constants/list_constants.dart';
-import 'package:cody/exceptions/otpauth_parse_exception.dart';
+import 'package:cody/l10n/app_localizations.dart';
 import 'package:cody/models/otp_auth_url.dart';
-import 'package:cody/services/local_storage_service.dart';
 import 'package:cody/services/navigator_service.dart';
 import 'package:cody/services/otpauth_url_parser_service.dart';
 import 'package:cody/services/otpauth_url_validator_service.dart';
@@ -17,7 +16,6 @@ import 'package:uuid/uuid.dart';
 import '../constants/style_constants.dart';
 import '../models/account.dart';
 import '../models/storage.dart';
-import '../widgets/settings_icon.dart';
 
 class ScanQRCodePage extends StatefulWidget {
 
@@ -55,7 +53,7 @@ class _ScanQRCodePageState extends State<ScanQRCodePage> {
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: mediumSize),
         child: Column(children: [
-          PageTitle(title: 'Add code'),
+          PageTitle(title: AppLocalizations.of(context)!.add_code_title),
           const SizedBox(
             height: mediumSize,
           ),
@@ -82,7 +80,7 @@ class _ScanQRCodePageState extends State<ScanQRCodePage> {
     try {
       OtpAuthUrlValidatorService().validateOrThrow(otpAuthUrl);
     } catch (exception) {
-      ToastService.showFailureToast('Failed to add this account');
+      ToastService.showFailureToast(AppLocalizations.of(context)!.toast_account_cannot_be_added);
       navigatorService.navigateTo('codes');
       return;
     }
@@ -92,7 +90,7 @@ class _ScanQRCodePageState extends State<ScanQRCodePage> {
 
     await Future.wait(ListsConstants.storageServices.map((Storage service) => service.saveAccount(account)));
 
-    ToastService.showSuccessToast('${account.provider} successfully added');
+    ToastService.showSuccessToast(AppLocalizations.of(context)!.toast_account_successfully_added.replaceAll('%provider%', account.provider));
     Haptics.vibrate(HapticsType.success);
 
     navigatorService.navigateTo('codes');

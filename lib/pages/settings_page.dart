@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cody/l10n/app_localizations.dart';
 import 'package:cody/models/app_preference.dart';
 import 'package:cody/services/app_preferences_service.dart';
 import 'package:cody/widgets/page_title.dart';
@@ -37,15 +38,15 @@ class _SettingsPageState extends State<SettingsPage> {
       padding: const EdgeInsets.symmetric(horizontal: mediumSize),
       child: Column(
         children: [
-          PageTitle(title: 'Settings'),
+          PageTitle(title: AppLocalizations.of(context)!.settings_title),
           verticalSpacingMedium,
-          CodySwitch(label: 'App Authentication', value: appPreference.isAppAuthenticationEnabled, onValueChange: (bool newValue) {
+          CodySwitch(label: AppLocalizations.of(context)!.label_app_authentication, value: appPreference.isAppAuthenticationEnabled, onValueChange: (bool newValue) {
             appPreference.isAppAuthenticationEnabled = newValue;
             _updateAppPreferences(appPreference);
             _updateUI();
           }, icon: Icons.lock,),
           getDivider(),
-          CodySwitch(label: 'Show Account Names', value: appPreference.shouldShowAccountName, onValueChange: (bool newValue) {
+          CodySwitch(label: AppLocalizations.of(context)!.label_show_account_names, value: appPreference.shouldShowAccountName, onValueChange: (bool newValue) {
             appPreference.shouldShowAccountName = newValue;
             _updateAppPreferences(appPreference);
             _updateUI();
@@ -57,7 +58,7 @@ class _SettingsPageState extends State<SettingsPage> {
               children: [
                 Icon(Icons.star),
                 horizontalSpacingMedium,
-                Text('Write review', style: settingsLabelTextStyle,),
+                Text(AppLocalizations.of(context)!.label_write_review, style: settingsLabelTextStyle,),
                 Spacer(),
                 Icon(Icons.arrow_forward_ios, color: Colors.blueGrey,)
               ],
@@ -65,7 +66,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           Spacer(),
           (packageInfo != null) ? Text('Version ${packageInfo!.version} (${packageInfo!.buildNumber})', style: secondaryTextStyle,) : Container(),
-          Text('Developed by Manuel Schuler', style: secondaryTextStyle,),
+          Text(AppLocalizations.of(context)!.label_developed_by, style: secondaryTextStyle,),
           verticalSpacingXLarge
         ],
       ),

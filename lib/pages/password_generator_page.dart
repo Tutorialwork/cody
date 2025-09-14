@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cody/l10n/app_localizations.dart';
 import 'package:cody/services/toast_service.dart';
 import 'package:cody/widgets/page_title.dart';
 import 'package:cody/widgets/password_generator_inputs/cody_password_generator_input.dart';
@@ -149,7 +150,7 @@ class _PasswordGeneratorPageState extends State<PasswordGeneratorPage> {
               padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             ),
             child: Text(
-              "Generate password",
+              AppLocalizations.of(context)!.label_generate_password_button,
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
@@ -157,7 +158,7 @@ class _PasswordGeneratorPageState extends State<PasswordGeneratorPage> {
           GestureDetector(
             onTap: () => navigatorService.navigateTo('password/checker'),
             child: Text(
-              "Check password",
+              AppLocalizations.of(context)!.label_check_password_security,
               style: secondaryLabelTextStyle,
             ),
           ),
@@ -204,7 +205,7 @@ class _PasswordGeneratorPageState extends State<PasswordGeneratorPage> {
 
   void _copyPassword() {
     Clipboard.setData(ClipboardData(text: controller.text));
-    ToastService.showSuccessToast('Password copied to clipboard');
+    ToastService.showSuccessToast(AppLocalizations.of(context)!.toast_password_copied_to_clipboard);
     Haptics.vibrate(HapticsType.success);
   }
 

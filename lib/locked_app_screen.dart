@@ -1,4 +1,5 @@
 import 'package:cody/constants/style_constants.dart';
+import 'package:cody/l10n/app_localizations.dart';
 import 'package:cody/navigator_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,7 +13,6 @@ class LockedAppScreen extends StatefulWidget {
 }
 
 class _LockedAppScreenState extends State<LockedAppScreen> {
-
   @override
   void didChangeDependencies() {
     _authenticate(context);
@@ -22,20 +22,26 @@ class _LockedAppScreenState extends State<LockedAppScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: primaryColor,
-        body: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset('assets/images/WhiteCody.png'),
-              verticalSpacingMedium,
-              Text('Cody', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
-              verticalSpacingSmall,
-              Text('The app is locked to show your codes please authenticate.', style: TextStyle(fontSize: 15), textAlign: TextAlign.center,)
-            ],
-          ),
+    return Scaffold(
+      backgroundColor: primaryColor,
+      body: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('assets/images/WhiteCody.png'),
+            verticalSpacingMedium,
+            Text(
+              'Cody',
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
+            verticalSpacingSmall,
+            Text(
+              AppLocalizations.of(context)!.label_app_locked,
+              style: TextStyle(fontSize: 15),
+              textAlign: TextAlign.center,
+            )
+          ],
         ),
       ),
     );
@@ -45,10 +51,8 @@ class _LockedAppScreenState extends State<LockedAppScreen> {
     try {
       LocalAuthentication auth = LocalAuthentication();
 
-      print(await auth.getAvailableBiometrics());
-
       bool isAuthenticated = await auth.authenticate(
-          localizedReason: 'Please authenticate to show your codes');
+          localizedReason: AppLocalizations.of(context)!.label_authentication_reason);
 
       if (!isAuthenticated) {
         return;

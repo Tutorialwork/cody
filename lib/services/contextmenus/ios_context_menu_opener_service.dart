@@ -8,6 +8,7 @@ import 'package:get_it/get_it.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
 
 import '../../blocs/totp/totp_bloc.dart';
+import '../../l10n/app_localizations.dart';
 import '../../widgets/account_code.dart';
 import '../app_preferences_service.dart';
 
@@ -28,14 +29,14 @@ class IosContextMenuOpenerService implements ContextMenuOpener {
             builder: (BuildContext menuContext) => CupertinoContextMenuAction(
               onPressed: () => AccountContextMenuService.editAccount(menuContext, context, state, bloc),
               trailingIcon: CupertinoIcons.pencil,
-              child: const Text('Edit'),
+              child: Text(AppLocalizations.of(context)!.edit),
             )
         ),
         Builder(builder: (BuildContext menuContext) => CupertinoContextMenuAction(
           onPressed: () => AccountContextMenuService.deleteAccount(menuContext, context, state, bloc),
           isDestructiveAction: true,
           trailingIcon: CupertinoIcons.delete,
-          child: const Text('Delete'),
+          child: Text(AppLocalizations.of(context)!.delete),
         )),
       ],
       child: SizedBox(

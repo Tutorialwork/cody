@@ -23,17 +23,16 @@ class _NavigatorPageState extends State<NavigatorPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
-            body: SafeArea(
-                child: Navigator(
-              key: navigatorService.navigatorKey,
-              initialRoute: 'codes',
-              onGenerateRoute: (RouteSettings settings) =>
-                  _onGenerateRoute(settings),
-            )),
-            bottomNavigationBar: Navbar(navigatorService.currentActiveRoute,
-                (String newRouteName) => _onPageRouteChanged(newRouteName))));
+    return Scaffold(
+        body: SafeArea(
+            child: Navigator(
+          key: navigatorService.navigatorKey,
+          initialRoute: 'codes',
+          onGenerateRoute: (RouteSettings settings) =>
+              _onGenerateRoute(settings),
+        )),
+        bottomNavigationBar: Navbar(navigatorService.currentActiveRoute,
+            (String newRouteName) => _onPageRouteChanged(newRouteName)));
   }
 
   PageRouteBuilder _onGenerateRoute(RouteSettings settings) {
@@ -45,15 +44,19 @@ class _NavigatorPageState extends State<NavigatorPage> {
         break;
       case 'codes/add':
         if (settings.arguments != null) {
-          ScanQRCodePageArguments arguments = settings.arguments as ScanQRCodePageArguments;
-          builder = (BuildContext context) => ScanQRCodePage(url: arguments.url);
+          ScanQRCodePageArguments arguments =
+              settings.arguments as ScanQRCodePageArguments;
+          builder =
+              (BuildContext context) => ScanQRCodePage(url: arguments.url);
         } else {
           builder = (BuildContext context) => ScanQRCodePage();
         }
         break;
       case 'codes/edit':
-        EditAccountPageArguments arguments = settings.arguments as EditAccountPageArguments;
-        builder = (BuildContext context) => EditAccountPage(account: arguments.account, onSave: arguments.onSave);
+        EditAccountPageArguments arguments =
+            settings.arguments as EditAccountPageArguments;
+        builder = (BuildContext context) => EditAccountPage(
+            account: arguments.account, onSave: arguments.onSave);
         break;
       case 'password/generator':
         builder = (BuildContext context) => PasswordGeneratorPage();
@@ -94,9 +97,7 @@ class _NavigatorPageState extends State<NavigatorPage> {
 
   void _updateUI() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      setState(() {
-
-      });
+      setState(() {});
     });
   }
 }

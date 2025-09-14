@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:cody/models/context_menu_opener.dart';
 import 'package:cody/services/contextmenus/android_context_menu_opener_service.dart';
@@ -20,5 +21,10 @@ class ListsConstants {
       : List.of({LocalStorageService()});
 
   static final List<ContextMenuOpener> contextMenuOpeners = List.of({AndroidContextMenuOpenerService(), IosContextMenuOpenerService()});
+
+  static final List<Locale> supportedLocales = List.of({
+    Locale('en'),
+    Locale('de'),
+  });
 
 }

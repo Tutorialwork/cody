@@ -10,6 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../widgets/account_code.dart';
 import 'account_context_menu_service.dart';
 
@@ -36,23 +37,23 @@ class AndroidContextMenuOpenerService implements ContextMenuOpener {
             Offset.zero & overlay.size, // Size of the overlay
           ),
           items: [
-            const PopupMenuItem<ContextMenuItem>(
+            PopupMenuItem<ContextMenuItem>(
               value: ContextMenuItem.editAccount,
               child: Row(
                 children: [
                   Icon(Icons.edit),
                   horizontalSpacingSmall,
-                  Text('Edit'),
+                  Text(AppLocalizations.of(context)!.edit),
                 ],
               ),
             ),
-            const PopupMenuItem<ContextMenuItem>(
+            PopupMenuItem<ContextMenuItem>(
               value: ContextMenuItem.deleteAccount,
               child: Row(
                 children: [
                   Icon(Icons.delete),
                   horizontalSpacingSmall,
-                  Text('Delete'),
+                  Text(AppLocalizations.of(context)!.delete),
                 ],
               ),
             ),

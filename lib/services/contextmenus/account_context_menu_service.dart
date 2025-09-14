@@ -1,4 +1,5 @@
 import 'package:cody/blocs/totp/totp_bloc.dart';
+import 'package:cody/l10n/app_localizations.dart';
 import 'package:cody/models/arguments/edit_account_page_arguments.dart';
 import 'package:cody/services/accounts_data_service.dart';
 import 'package:cody/services/navigator_service.dart';
@@ -38,7 +39,11 @@ class AccountContextMenuService {
     AlertDialogOpener opener = ListsConstants.alertDialogOpeners.where((AlertDialogOpener opener) => opener.isPlatformMatching()).toList().first;
     opener.openQuestionDialog(
         context,
-        AlertDialogContent('Deleting account', 'Do you really want to delete this account?', 'Yes, delete', 'No, cancel'),
+        AlertDialogContent(
+            AppLocalizations.of(context)!.question_deleting_account_title,
+            AppLocalizations.of(context)!.question_deleting_account_message,
+            AppLocalizations.of(context)!.label_deleting_account_confirm,
+            AppLocalizations.of(context)!.label_deleting_account_cancel),
             (BuildContext alertContext) => Navigator.pop(alertContext),
             (BuildContext alertContext) => _onDeleteDialogConfirm(alertContext, state, bloc));
   }
