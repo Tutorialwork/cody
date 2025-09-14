@@ -6,6 +6,7 @@ import FlutterMacOS
 import Foundation
 
 import app_links
+import firebase_core
 import flutter_cloud_kit
 import flutter_secure_storage_macos
 import local_auth_darwin
@@ -17,6 +18,7 @@ import url_launcher_macos
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   AppLinksMacosPlugin.register(with: registry.registrar(forPlugin: "AppLinksMacosPlugin"))
+  FLTFirebaseCorePlugin.register(with: registry.registrar(forPlugin: "FLTFirebaseCorePlugin"))
   FlutterCloudKitPlugin.register(with: registry.registrar(forPlugin: "FlutterCloudKitPlugin"))
   FlutterSecureStoragePlugin.register(with: registry.registrar(forPlugin: "FlutterSecureStoragePlugin"))
   LocalAuthPlugin.register(with: registry.registrar(forPlugin: "LocalAuthPlugin"))

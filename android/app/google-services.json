@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "372638686987",
+    "project_id": "cody-authenticator",
+    "storage_bucket": "cody-authenticator.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:372638686987:android:c7051d4046525f3f3fcc0e",
+        "android_client_info": {
+          "package_name": "dev.manuelschuler.cody"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGs06PtToanHLKCq8As-ffvydoz0S5I2M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
