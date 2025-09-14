@@ -1,3 +1,4 @@
+import 'package:cody/constants/analytics_event_names_constants.dart';
 import 'package:cody/l10n/app_localizations.dart';
 import 'package:cody/services/leaked_password_checker_service.dart';
 import 'package:cody/services/toast_service.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../constants/style_constants.dart';
+import '../services/analytics_service.dart';
 import '../widgets/page_title.dart';
 
 class LeakedPasswordCheckerPage extends StatefulWidget {
@@ -21,6 +23,14 @@ class LeakedPasswordCheckerPageState extends State<LeakedPasswordCheckerPage> {
   final LeakedPasswordCheckerService service = LeakedPasswordCheckerService();
 
   int? passwordLeakedCount;
+
+
+  @override
+  void initState() {
+    AnalyticsService.logScreen('Check password', (LeakedPasswordCheckerPage).toString());
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +60,8 @@ class LeakedPasswordCheckerPageState extends State<LeakedPasswordCheckerPage> {
                     ToastService.showFailureToast(AppLocalizations.of(context)!.toast_password_cannot_be_empty);
                     return;
                   }
+
+                  AnalyticsService.logEvent(AnalyticsEventNamesConstants.checkPasswordSecurity);
 
                   int counter = await service.getLeakedCounterByPassword(
                       service.hashPassword(controller.text));

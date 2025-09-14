@@ -10,8 +10,10 @@ import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
 
+import '../../constants/analytics_event_names_constants.dart';
 import '../../l10n/app_localizations.dart';
 import '../../widgets/account_code.dart';
+import '../analytics_service.dart';
 import 'account_context_menu_service.dart';
 
 class AndroidContextMenuOpenerService implements ContextMenuOpener {
@@ -76,6 +78,7 @@ class AndroidContextMenuOpenerService implements ContextMenuOpener {
         height: 150,
         child: GestureDetector(
           onTap: () async {
+            AnalyticsService.logEvent(AnalyticsEventNamesConstants.copyAccountCode);
             Clipboard.setData(ClipboardData(text: state.code));
             await Haptics.vibrate(HapticsType.success);
           },

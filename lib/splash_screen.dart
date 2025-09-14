@@ -2,6 +2,7 @@ import 'package:cody/constants/style_constants.dart';
 import 'package:cody/locked_app_screen.dart';
 import 'package:cody/models/app_preference.dart';
 import 'package:cody/navigator_page.dart';
+import 'package:cody/services/analytics_service.dart';
 import 'package:cody/services/app_links_service.dart';
 import 'package:cody/services/app_preferences_service.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
+    AnalyticsService.logScreen('Splash', (SplashScreen).toString());
+
     _checkAppPreferencesAndNavigate();
     AppLinksService.handleIncomingAppLinks();
 

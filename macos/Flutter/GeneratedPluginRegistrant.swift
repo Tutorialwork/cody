@@ -6,6 +6,7 @@ import FlutterMacOS
 import Foundation
 
 import app_links
+import firebase_analytics
 import firebase_core
 import flutter_cloud_kit
 import flutter_secure_storage_macos
@@ -18,6 +19,7 @@ import url_launcher_macos
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   AppLinksMacosPlugin.register(with: registry.registrar(forPlugin: "AppLinksMacosPlugin"))
+  FirebaseAnalyticsPlugin.register(with: registry.registrar(forPlugin: "FirebaseAnalyticsPlugin"))
   FLTFirebaseCorePlugin.register(with: registry.registrar(forPlugin: "FLTFirebaseCorePlugin"))
   FlutterCloudKitPlugin.register(with: registry.registrar(forPlugin: "FlutterCloudKitPlugin"))
   FlutterSecureStoragePlugin.register(with: registry.registrar(forPlugin: "FlutterSecureStoragePlugin"))

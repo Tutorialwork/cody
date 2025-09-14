@@ -1,3 +1,4 @@
+import 'package:cody/constants/analytics_event_names_constants.dart';
 import 'package:cody/constants/list_constants.dart';
 import 'package:cody/l10n/app_localizations.dart';
 import 'package:cody/models/otp_auth_url.dart';
@@ -16,6 +17,7 @@ import 'package:uuid/uuid.dart';
 import '../constants/style_constants.dart';
 import '../models/account.dart';
 import '../models/storage.dart';
+import '../services/analytics_service.dart';
 
 class ScanQRCodePage extends StatefulWidget {
 
@@ -36,6 +38,8 @@ class _ScanQRCodePageState extends State<ScanQRCodePage> {
 
   @override
   void initState() {
+    AnalyticsService.logScreen('Add account', (ScanQRCodePage).toString());
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (widget.url != null) {
         _toggleLoading();
@@ -92,6 +96,8 @@ class _ScanQRCodePageState extends State<ScanQRCodePage> {
 
     ToastService.showSuccessToast(AppLocalizations.of(context)!.toast_account_successfully_added.replaceAll('%provider%', account.provider));
     Haptics.vibrate(HapticsType.success);
+
+    AnalyticsService.logEvent(AnalyticsEventNamesConstants.addedNewAccount);
 
     navigatorService.navigateTo('codes');
   }

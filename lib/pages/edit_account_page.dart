@@ -1,3 +1,4 @@
+import 'package:cody/constants/analytics_event_names_constants.dart';
 import 'package:cody/constants/list_constants.dart';
 import 'package:cody/constants/style_constants.dart';
 import 'package:cody/l10n/app_localizations.dart';
@@ -8,6 +9,7 @@ import 'package:cody/widgets/page_title.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../models/alert_dialog_opener.dart';
+import '../services/analytics_service.dart';
 
 class EditAccountPage extends StatefulWidget {
 
@@ -30,6 +32,8 @@ class _EditAccountPageState extends State<EditAccountPage> {
 
   @override
   void initState() {
+    AnalyticsService.logScreen('Edit account', (EditAccountPage).toString());
+
     setState(() {
       providerController.text = widget.account.provider;
       accountNameController.text = widget.account.accountName;
@@ -92,6 +96,8 @@ class _EditAccountPageState extends State<EditAccountPage> {
     setState(() {
       isLoading = true;
     });
+
+    AnalyticsService.logEvent(AnalyticsEventNamesConstants.editedAccount);
 
     Account newAccount = Account(widget.account.id, newProvider, newAccountName, widget.account.secret, true, DateTime.now());
     widget.onSave(newAccount);

@@ -8,6 +8,7 @@ import 'package:cody/models/account_data_result.dart';
 import 'package:cody/models/context_menu_opener.dart';
 import 'package:cody/blocs/totp/totp_bloc.dart';
 import 'package:cody/services/accounts_data_service.dart';
+import 'package:cody/services/analytics_service.dart';
 import 'package:cody/widgets/expiration_counter.dart';
 import 'package:cody/widgets/loading.dart';
 import 'package:cody/widgets/no_accounts.dart';
@@ -31,6 +32,8 @@ class _CodesPageState extends State<CodesPage> with WidgetsBindingObserver {
 
   @override
   void initState() {
+    AnalyticsService.logScreen('Codes', (CodesPage).toString());
+
     WidgetsBinding.instance.addObserver(this);
     dataService.cleanupLocalCodes();
     dataService.fetchNewData(_onDataLoaded);

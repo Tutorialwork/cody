@@ -11,6 +11,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../constants/style_constants.dart';
+import '../services/analytics_service.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -27,6 +28,8 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   void initState() {
+    AnalyticsService.logScreen('Settings', (SettingsPage).toString());
+
     _loadPackageInfo();
 
     super.initState();

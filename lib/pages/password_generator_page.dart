@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cody/constants/analytics_event_names_constants.dart';
 import 'package:cody/l10n/app_localizations.dart';
 import 'package:cody/services/toast_service.dart';
 import 'package:cody/widgets/page_title.dart';
@@ -11,6 +12,7 @@ import 'package:get_it/get_it.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
 
 import '../constants/style_constants.dart';
+import '../services/analytics_service.dart';
 import '../services/navigator_service.dart';
 
 class PasswordGeneratorPage extends StatefulWidget {
@@ -32,6 +34,8 @@ class _PasswordGeneratorPageState extends State<PasswordGeneratorPage> {
 
   @override
   void initState() {
+    AnalyticsService.logScreen('Generator', (PasswordGeneratorPage).toString());
+
     controller.text = generatePassword(length: passwordLength.round());
     super.initState();
   }
@@ -170,6 +174,8 @@ class _PasswordGeneratorPageState extends State<PasswordGeneratorPage> {
   bool isAllowedToDisableOption(bool newStatus) => !newStatus && _checkActivePasswordOptions() == 1;
 
   void _onGenerateNewPassword() {
+    AnalyticsService.logEvent(AnalyticsEventNamesConstants.generatePassword);
+
     controller.text = generatePassword(
         length: passwordLength.round(),
         includeLowercase: includeLowercase,
@@ -204,6 +210,8 @@ class _PasswordGeneratorPageState extends State<PasswordGeneratorPage> {
   }
 
   void _copyPassword() {
+    AnalyticsService.logEvent(AnalyticsEventNamesConstants.copyGeneratedPassword);
+
     Clipboard.setData(ClipboardData(text: controller.text));
     ToastService.showSuccessToast(AppLocalizations.of(context)!.toast_password_copied_to_clipboard);
     Haptics.vibrate(HapticsType.success);

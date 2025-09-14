@@ -1,6 +1,7 @@
 import 'package:cody/constants/style_constants.dart';
 import 'package:cody/l10n/app_localizations.dart';
 import 'package:cody/navigator_page.dart';
+import 'package:cody/services/analytics_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
@@ -13,6 +14,14 @@ class LockedAppScreen extends StatefulWidget {
 }
 
 class _LockedAppScreenState extends State<LockedAppScreen> {
+
+  @override
+  void initState() {
+    AnalyticsService.logScreen('Locked App', (LockedAppScreen).toString());
+
+    super.initState();
+  }
+
   @override
   void didChangeDependencies() {
     _authenticate(context);

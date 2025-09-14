@@ -1,7 +1,9 @@
 import 'package:cody/blocs/totp/totp_bloc.dart';
+import 'package:cody/constants/analytics_event_names_constants.dart';
 import 'package:cody/l10n/app_localizations.dart';
 import 'package:cody/models/arguments/edit_account_page_arguments.dart';
 import 'package:cody/services/accounts_data_service.dart';
+import 'package:cody/services/analytics_service.dart';
 import 'package:cody/services/navigator_service.dart';
 import 'package:cody/services/toast_service.dart';
 import 'package:flutter/material.dart';
@@ -70,6 +72,8 @@ class AccountContextMenuService {
 
     ToastService.showSuccessToast('${state.provider} deleted!');
     Haptics.vibrate(HapticsType.success);
+
+    AnalyticsService.logEvent(AnalyticsEventNamesConstants.deletedAccount);
 
     dataService.accounts.remove(bloc);
     dataService.updateStream.add(null);
