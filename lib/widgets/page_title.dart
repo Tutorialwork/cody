@@ -37,9 +37,12 @@ class PageTitle extends StatelessWidget {
             onTap: () => navigatorService.navigateTo(navigatorService.previousRoute),
             child: Icon(Icons.arrow_back_ios)),
         horizontalSpacingSmall,
-        Text(
-          title,
-          style: pageHeadingTextStyle,
+        Expanded(
+          child: Text(
+            title,
+            style: pageHeadingTextStyle,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
       ],
     );
@@ -51,6 +54,7 @@ class PageTitle extends StatelessWidget {
         child: Text(
           title,
           style: pageHeadingTextStyle,
+          overflow: TextOverflow.ellipsis,
         ));
   }
 }
