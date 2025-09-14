@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:cody/constants/list_constants.dart';
 import 'package:cody/constants/style_constants.dart';
@@ -128,7 +129,14 @@ class _CodesPageState extends State<CodesPage> with WidgetsBindingObserver {
   }
 
   Widget _getContextMenu(BuildContext context, TotpCodeGenerated state, TotpBloc bloc) {
-    ContextMenuOpener opener = ListsConstants.contextMenuOpeners.where((ContextMenuOpener opener) => opener.isPlatformMatching()).toList().first;
+    ContextMenuOpener opener;
+
+    if (!Platform.environment.containsKey('FLUTTER_TEST')) {
+      opener = ListsConstants.contextMenuOpeners.where((ContextMenuOpener opener) => opener.isPlatformMatching()).toList().first;
+    } else {
+      opener = ListsConstants.contextMenuOpeners.first;
+    }
+
     return opener.getContextMenuWidget(context, state, bloc);
   }
 

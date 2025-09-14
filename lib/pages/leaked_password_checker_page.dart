@@ -12,10 +12,10 @@ class LeakedPasswordCheckerPage extends StatefulWidget {
 
   @override
   State<LeakedPasswordCheckerPage> createState() =>
-      _LeakedPasswordCheckerPageState();
+      LeakedPasswordCheckerPageState();
 }
 
-class _LeakedPasswordCheckerPageState extends State<LeakedPasswordCheckerPage> {
+class LeakedPasswordCheckerPageState extends State<LeakedPasswordCheckerPage> {
   final TextEditingController controller = TextEditingController();
 
   final LeakedPasswordCheckerService service = LeakedPasswordCheckerService();
