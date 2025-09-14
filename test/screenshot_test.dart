@@ -24,6 +24,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import 'mocked_data/mock_codes_data.dart';
+import 'cody_golden_screenshot_devices.dart';
 import 'screenshot_test.mocks.dart';
 
 @GenerateMocks([
@@ -118,7 +119,7 @@ void _screenshotWidget({
 
   group(goldenFileName, () {
     for (final locale in locales) {
-      for (final goldenDevice in GoldenScreenshotDevices.values) {
+      for (final goldenDevice in CodyGoldenScreenshotDevices.values) {
         testGoldens('for ${goldenDevice.name}', (WidgetTester tester) async {
           ScreenshotDevice device = goldenDevice.device;
 
