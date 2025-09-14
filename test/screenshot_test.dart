@@ -6,6 +6,8 @@ library;
 
 import 'dart:async';
 
+import 'package:cody/constants/list_constants.dart';
+import 'package:cody/l10n/app_localizations.dart';
 import 'package:cody/pages/codes_page.dart';
 import 'package:cody/pages/leaked_password_checker_page.dart';
 import 'package:cody/pages/password_generator_page.dart';
@@ -14,6 +16,7 @@ import 'package:cody/services/app_preferences_service.dart';
 import 'package:cody/services/navigator_service.dart';
 import 'package:cody/widgets/navbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:golden_screenshot/golden_screenshot.dart';
@@ -111,7 +114,7 @@ void _screenshotWidget({
   required Widget child,
   required Function(WidgetTester, String locale) ingestDataFunction
 }) {
-  List locales = List<String>.of(['en']);
+  List locales = List<String>.of(['en', 'de']);
 
   group(goldenFileName, () {
     for (final locale in locales) {
@@ -123,10 +126,14 @@ void _screenshotWidget({
             theme: theme,
             device: device,
             child: child,
-            supportedLocales: [
-              Locale('en', ''),
+            supportedLocales: ListsConstants.supportedLocales,
+            localizationsDelegates: [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
             ],
-            locale: Locale('en'),
+            locale: Locale(locale),
           );
 
           await tester.pumpWidget(widget);
